@@ -10,7 +10,6 @@ public class RotateObject : MonoBehaviour
 {
     public Transform objectChange;
     public float rotationSpeed;
-    public Transform camera;
     public Vector3 target;
 
     private Quaternion targetRotation;
@@ -18,9 +17,6 @@ public class RotateObject : MonoBehaviour
     private bool Rotated = false;
     private Vector3 rotateOnTime;
     
-
-    [SerializeField] private float raycastRange = 24.1f;
-    [SerializeField] private LayerMask layerMask;
     private float changingX;
     private float changingY;
     private float changingZ;
@@ -37,18 +33,27 @@ public class RotateObject : MonoBehaviour
         changingY = objectChange.transform.rotation.y;
         changingZ = objectChange.transform.rotation.z;
         startRoated = new Vector3(changingX, changingY, changingZ);
-        if (changingX != target.x)
+        if (Mathf.Abs(changingX - target.x) >= 1f)
         {
             vectorOpen = Vector3.left;
             vectorClose = Vector3.right;
-        } else if (changingY != target.y)
+            Debug.Log("Rotate X");
+            Debug.Log( "X: "+changingX + " - " + target.x);
+        }
+        if (Mathf.Abs(changingY - target.y) >= 1f)
         {
             vectorOpen = Vector3.down;
             vectorClose = Vector3.up;
-        } else if (changingZ != target.z)
+            Debug.Log("Rotate Y");
+            Debug.Log("Y: " + changingY + " - " + target.y);
+        }
+        if (Mathf.Abs(changingZ - target.z) >= 1f)
         {
             vectorOpen = Vector3.back;
             vectorClose = Vector3.forward;
+            Debug.Log("Rotate Z");
+            Debug.Log("Z: " + changingZ + " - " + target.z);
+
         }
     }
     void Update()
