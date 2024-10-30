@@ -24,10 +24,8 @@ public class RotateObject : MonoBehaviour
     private Vector3 vectorOpen;
     private Vector3 vectorClose;
 
-    // Start is called before the first frame update
     private void Start()
     {
-
         targetRotation = Quaternion.Euler(target);
         changingX = objectChange.transform.rotation.x;
         changingY = objectChange.transform.rotation.y;
